@@ -1,0 +1,17 @@
+{
+  "name": "promptranks-marketplace",
+  "owner": {
+    "name": "PromptRanks Team",
+    "email": "team@promptranks.com"
+  },
+  "metadata": {
+    "description": "Official PromptRanks question generation workflow plugins",
+    "version": "1.0.0"
+  },
+  "plugins": [
+    {
+      "name": "prk-question-flow",
+      "source": "."
+    }
+  ]
+}
