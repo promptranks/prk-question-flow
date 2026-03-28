@@ -39,11 +39,10 @@ prk-question-init --role
    locked: false
    ```
 
-3. **Fetch industry data from database**
-   - Query: `SELECT id, name, slug, description FROM industries WHERE slug IN (...)`
-   - Via MCP or cached data
+4. **Call agent:**
+   - `industry-role-generator` with industry_slugs parameter
 
-4. **Create industry.yaml**
+5. **Create industry.yaml**
    ```yaml
    industries:
      - id: uuid
@@ -58,7 +57,8 @@ prk-question-init --role
 
 ### With --role
 
-1. **Read industry.yaml from current working folder**
+1. **Call agent:**
+   - `industry-role-generator` with industry_yaml_path parameter
 
 2. **For each industry, fetch roles**
    - Query: `SELECT id, name, slug, industry_id, responsibilities FROM roles WHERE industry_id = ?`

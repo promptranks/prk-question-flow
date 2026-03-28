@@ -34,8 +34,8 @@ prk-question-create [number]
    - Update `create-status.yaml`
    - Stop after industry completion
 
-4. **Call agents:**
-   - `industry-qa-agent` for each role
+4. **Call agent:**
+   - `question-generator` for each role-pillar-difficulty combination
    - Provides full context: PECAM framework, industry, role, pillar, difficulty
 
 5. **Auto-call** `prk-question-status` at end

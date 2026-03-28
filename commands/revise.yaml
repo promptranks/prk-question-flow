@@ -19,7 +19,8 @@ prk-question-revise
 
 1. **Scan all questions-*.yaml files**
 2. **Find qa_status: REVISED**
-3. **Regenerate using QA feedback**
+3. **Call agent:**
+   - `question-reviser` for each REVISED question
 4. **Update same YAML file**
 5. **Set qa_status: TBI**
 

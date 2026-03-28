@@ -18,7 +18,9 @@ prk-question-qa
 ## Behavior
 
 1. **Read current working folder**
-2. **Process only TBI and REVISED questions**
+2. **Call agent:**
+   - `question-validator` for each questions file
+3. **Process only TBI and REVISED questions**
 3. **Skip PASSED questions**
 4. **For each question:**
    - Validate format, content, quality
