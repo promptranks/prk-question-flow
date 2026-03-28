@@ -311,16 +311,19 @@ Validate generated questions
 
 **Behavior:**
 - Reads current working folder from `state.yaml`
+- **Processes only questions with `qa_status: TBI` or `REVISED`**
+- **Skips questions with `qa_status: PASSED`**
 - Follows same iteration order as creation (industry → roles)
-- For each question in `questions-{industry}.yaml`:
+- For each question:
   - Validates format, content, quality
-  - Checks duplicates against `cache/core_questions.yaml`
+  - **Semantic duplicate check via MCP embeddings** (cosine similarity > 0.85)
   - Scores: clarity, relevance, difficulty (1-10)
   - Sets `qa_status`:
-    - `PASSED` if score ≥ 7.0
-    - `REVISED` if score < 7.0 (adds revision suggestions)
+    - `PASSED` if score ≥ 7.0 and no duplicates
+    - `REVISED` if score < 7.0 or duplicate found (adds feedback)
 - Updates `qa-status.yaml` after each industry
 - Stops after each industry completion
+- **Reports completion:** "All questions PASSED" or "X questions need revision"
 
 **Output:**
 ```yaml
@@ -483,6 +486,44 @@ Total: 10 questions (4 D1, 4 D2, 2 D3)
 - Pillar alignment ≥ 7.0
 
 ---
+
+---
+
+## MCP Server Integration
+
+### Overview
+
+Contributors run their own MCP server to access PromptRanks database for duplicate detection.
+
+### Installation
+
+```bash
+npm install -g @promptranks/questions-mcp-server
+```
+
+### Configuration
+
+```json
+{
+  "mcpServers": {
+    "promptranks-questions": {
+      "command": "npx",
+      "args": ["@promptranks/questions-mcp-server"],
+      "env": {
+        "DATABASE_URL": "postgresql://user:pass@host:5432/promptranks",
+        "EMBEDDING_PROVIDER": "openai",
+        "OPENAI_API_KEY": "your-key"
+      }
+    }
+  }
+}
+```
+
+### Endpoints
+
+- `get_questions(industry_id, role_id)` - Existing questions
+- `get_embeddings(industry_id, role_id)` - Question embeddings
+- `check_duplicate(question_text, industry_id, role_id)` - Semantic check (similarity > 0.85)
 
 ---
 
