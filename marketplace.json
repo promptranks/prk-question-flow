@@ -1,0 +1,10 @@
+{
+  "name": "PromptRanks Plugins",
+  "description": "Official PromptRanks question generation workflow plugins",
+  "plugins": [
+    {
+      "name": "prk-question-flow",
+      "path": ".claude-plugin"
+    }
+  ]
+}
