@@ -7,7 +7,10 @@
 
 ## Overview
 
-MCP server for PromptRanks question generation workflow. Provides read-only database access and semantic duplicate detection.
+MCP server for PromptRanks question generation workflow. Provides database access for:
+- Industry/role lookup and creation
+- Question duplicate detection
+- Existing question retrieval
 
 ---
 
@@ -42,6 +45,52 @@ npm install -g @promptranks/questions-mcp-server
 
 ## Endpoints
 
+### get_or_create_industry
+```typescript
+get_or_create_industry(name: string, slug: string, description: string): Industry
+```
+**Behavior:**
+- Check if industry exists by slug
+- If exists: return existing industry with ID
+- If not: create new industry, return with new ID
+
+**Returns:**
+```json
+{
+  "id": "uuid",
+  "name": "Technology",
+  "slug": "tech",
+  "description": "...",
+  "existed": true
+}
+```
+
+### get_or_create_role
+```typescript
+get_or_create_role(
+  name: string,
+  slug: string,
+  industry_id: string,
+  responsibilities: string[]
+): Role
+```
+**Behavior:**
+- Check if role exists by slug and industry_id
+- If exists: return existing role with ID
+- If not: create new role, return with new ID
+
+**Returns:**
+```json
+{
+  "id": "uuid",
+  "name": "Data Scientist",
+  "slug": "data-scientist",
+  "industry_id": "uuid",
+  "responsibilities": [...],
+  "existed": false
+}
+```
+
 ### get_questions
 ```typescript
 get_questions(industry_id: string, role_id?: string): Question[]
@@ -65,6 +114,7 @@ check_duplicate(
 
 ## Security
 
-- Read-only database access
+- Database access: Read + Write (industries, roles only)
 - Rate limit: 100 req/hour (configurable)
 - No user data exposed
+- Write operations limited to taxonomy (industries/roles)
