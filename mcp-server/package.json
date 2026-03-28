@@ -1,0 +1,35 @@
+{
+  "name": "@promptranks/questions-mcp-server",
+  "version": "1.0.1",
+  "description": "MCP server for PromptRanks question generation workflow",
+  "type": "module",
+  "bin": {
+    "prk-mcp-server": "./dist/index.js"
+  },
+  "files": [
+    "dist",
+    "README.md"
+  ],
+  "scripts": {
+    "build": "tsc",
+    "dev": "tsc --watch",
+    "start": "node dist/index.js",
+    "prepublishOnly": "npm run build"
+  },
+  "keywords": ["mcp", "promptranks", "questions", "model-context-protocol"],
+  "author": "PromptRanks Team",
+  "license": "MIT",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/promptranks/prk-question-flow.git",
+    "directory": "mcp-server"
+  },
+  "homepage": "https://github.com/promptranks/prk-question-flow/tree/main/mcp-server",
+  "dependencies": {
+    "@modelcontextprotocol/sdk": "^1.0.4"
+  },
+  "devDependencies": {
+    "@types/node": "^22.10.2",
+    "typescript": "^5.7.2"
+  }
+}

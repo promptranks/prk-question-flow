@@ -27,15 +27,19 @@ prk-question-init --role
 
 1. Create timestamped working folder: `.prk-question/work-YYYY-MM-DD-NNN/`
 2. Update `state.yaml` with current_work_folder
-3. Call `industry-role-generator` agent with industry_slugs
-4. Create `industry.yaml` with industry definitions
+3. For each industry slug:
+   - Use MCP tool `get_or_create_industry` to get/create industry in database
+   - Store industry with real database ID
+4. Create `industry.yaml` with industry definitions (including database IDs)
 5. Cache existing questions from database to `.prk-question/cache/`
 
 ### With --role
 
-1. Call `industry-role-generator` agent with industry_yaml_path
-2. Fetch roles from database for each industry
-3. Create `roles.yaml` with role definitions
+1. Read `industry.yaml` to get industries with database IDs
+2. For each industry:
+   - Call `industry-role-generator` agent to generate role definitions
+   - For each role, use MCP tool `get_or_create_role` to get/create in database
+3. Create `roles.yaml` with role definitions (including database IDs)
 
 ## Output Files
 

@@ -26,13 +26,10 @@ Create structured industry and role definitions that match database schema and A
 ### Generate Industries
 
 1. **Parse industry slugs** from input
-2. **Fetch from MCP server** (or use cached data):
-   ```sql
-   SELECT id, name, slug, description
-   FROM industries
-   WHERE slug IN (...)
-   ```
-3. **Generate industry.yaml**:
+2. **For each slug, use MCP tool** `get_or_create_industry`:
+   - Call with name, slug, description
+   - Receive real database ID
+3. **Generate industry.yaml** with database IDs:
    ```yaml
    industries:
      - id: a0000001-0000-0000-0000-000000000001
@@ -48,13 +45,11 @@ Create structured industry and role definitions that match database schema and A
 ### Generate Roles
 
 1. **Read industry.yaml** from working folder
-2. **For each industry, fetch roles**:
-   ```sql
-   SELECT id, name, slug, industry_id
-   FROM roles
-   WHERE industry_id = ?
-   ```
-3. **Generate roles.yaml**:
+2. **For each industry, generate role definitions**
+3. **For each role, use MCP tool** `get_or_create_role`:
+   - Call with name, slug, industry_id, responsibilities
+   - Receive real database ID
+4. **Generate roles.yaml** with database IDs:
    ```yaml
    roles:
      - id: b0000001-0000-0000-0000-000000000002
