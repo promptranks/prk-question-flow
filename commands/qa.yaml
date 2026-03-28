@@ -20,8 +20,7 @@ prk-question-qa
 1. **Read current working folder**
 2. **Call agent:**
    - `question-validator` for each questions file
-3. **Process only TBI and REVISED questions**
-3. **Skip PASSED questions**
+3. **Process only TBI and REVISED questions, skip PASSED**
 4. **For each question:**
    - Validate format, content, quality
    - Semantic duplicate check via MCP (similarity > 0.85)
