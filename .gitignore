@@ -1,0 +1,27 @@
+# Python
+__pycache__/
+*.py[cod]
+*$py.class
+*.so
+.Python
+env/
+venv/
+
+# IDE
+.vscode/
+.idea/
+*.swp
+*.swo
+
+# OS
+.DS_Store
+Thumbs.db
+
+# Output (keep directory, ignore contents)
+output/*.yaml
+output/*.json
+!output/.gitkeep
+
+# Database
+*.db
+*.sqlite

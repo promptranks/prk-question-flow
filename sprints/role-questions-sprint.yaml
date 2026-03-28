@@ -1,0 +1,52 @@
+---
+name: role-questions-sprint
+version: 1.0.0
+description: Generate and validate role-specific questions
+variables:
+  role: financial-analyst
+  pillar: E
+  difficulty: 2
+  question_count: 2
+
+tasks:
+  - name: generate-role-questions
+    agent: role-qa-agent
+    inputs:
+      role_name: "{{ roles[role].name }}"
+      role_slug: "{{ role }}"
+      role_id: "{{ roles[role].id }}"
+      industry_name: "{{ roles[role].industry_name }}"
+      industry_id: "{{ roles[role].industry_id }}"
+      pillar: "{{ pillar }}"
+      difficulty: "{{ difficulty }}"
+      question_count: "{{ question_count }}"
+      output_file: "output/{{ role }}-{{ pillar }}-D{{ difficulty }}.yaml"
+
+  - name: validate-role-questions
+    agent: qa-role-validation-agent
+    depends_on: [generate-role-questions]
+    inputs:
+      input_file: "output/{{ role }}-{{ pillar }}-D{{ difficulty }}.yaml"
+      validation_report: "output/{{ role }}-{{ pillar }}-D{{ difficulty }}-validation.json"
+      industry_questions_db: "data/industry_questions.yaml"
+
+  - name: check-approval
+    type: decision
+    depends_on: [validate-role-questions]
+    condition: "{{ validation.approved == true }}"
+    on_success: complete
+    on_failure: regenerate
+
+  - name: regenerate
+    agent: role-qa-agent
+    inputs:
+      role_name: "{{ roles[role].name }}"
+      role_slug: "{{ role }}"
+      role_id: "{{ roles[role].id }}"
+      industry_name: "{{ roles[role].industry_name }}"
+      industry_id: "{{ roles[role].industry_id }}"
+      pillar: "{{ pillar }}"
+      difficulty: "{{ difficulty }}"
+      question_count: "{{ question_count }}"
+      output_file: "output/{{ role }}-{{ pillar }}-D{{ difficulty }}.yaml"
+      feedback: "{{ validation.suggestions }}"

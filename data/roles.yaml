@@ -1,0 +1,30 @@
+roles:
+  financial-analyst:
+    name: Financial Analyst
+    id: b0000001-0000-0000-0000-000000000203
+    industry_name: Finance & Banking
+    industry_id: a0000001-0000-0000-0000-000000000002
+    responsibilities:
+      - Analyze financial data and trends
+      - Create forecasts and models
+      - Prepare reports for stakeholders
+
+  data-scientist:
+    name: Data Scientist
+    id: b0000001-0000-0000-0000-000000000002
+    industry_name: Technology
+    industry_id: a0000001-0000-0000-0000-000000000001
+    responsibilities:
+      - Build predictive models
+      - Analyze large datasets
+      - Communicate insights
+
+  ml-engineer:
+    name: ML Engineer
+    id: b0000001-0000-0000-0000-000000000101
+    industry_name: Technology
+    industry_id: a0000001-0000-0000-0000-000000000001
+    responsibilities:
+      - Deploy ML models
+      - Optimize model performance
+      - Build ML pipelines

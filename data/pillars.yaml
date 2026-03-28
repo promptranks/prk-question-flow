@@ -1,0 +1,45 @@
+pillars:
+  P:
+    name: Prompt Design
+    description: Crafting clear, high-leverage instructions
+    concepts:
+      - Clarity and structure
+      - Format control
+      - Instruction engineering
+      - Output specification
+
+  E:
+    name: Evaluation
+    description: Judging output quality and failure modes
+    concepts:
+      - Testing and debugging
+      - Quality assessment
+      - Failure mode analysis
+      - Iterative refinement
+
+  C:
+    name: Context Management
+    description: Managing memory, retrieval, and constraints
+    concepts:
+      - RAG and retrieval
+      - Token optimization
+      - Multi-document handling
+      - Context window management
+
+  M:
+    name: Meta-Cognition
+    description: Reasoning about model behavior and limits
+    concepts:
+      - Model understanding
+      - Capability limits
+      - Bias awareness
+      - Model selection
+
+  A:
+    name: Agentic Prompting
+    description: Designing multi-step workflows that compound
+    concepts:
+      - Multi-step pipelines
+      - Tool use
+      - Agent workflows
+      - Autonomous systems

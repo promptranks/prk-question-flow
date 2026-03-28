@@ -1,0 +1,48 @@
+---
+name: industry-questions-sprint
+version: 1.0.0
+description: Generate and validate industry-specific questions
+variables:
+  industry: finance
+  pillar: P
+  difficulty: 1
+  question_count: 2
+
+tasks:
+  - name: generate-questions
+    agent: industry-qa-agent
+    inputs:
+      industry_name: "{{ industries[industry].name }}"
+      industry_slug: "{{ industry }}"
+      industry_id: "{{ industries[industry].id }}"
+      pillar: "{{ pillar }}"
+      difficulty: "{{ difficulty }}"
+      question_count: "{{ question_count }}"
+      output_file: "output/{{ industry }}-{{ pillar }}-D{{ difficulty }}.yaml"
+
+  - name: validate-questions
+    agent: qa-validation-agent
+    depends_on: [generate-questions]
+    inputs:
+      input_file: "output/{{ industry }}-{{ pillar }}-D{{ difficulty }}.yaml"
+      validation_report: "output/{{ industry }}-{{ pillar }}-D{{ difficulty }}-validation.json"
+      core_questions_db: "data/core_questions.yaml"
+
+  - name: check-approval
+    type: decision
+    depends_on: [validate-questions]
+    condition: "{{ validation.approved == true }}"
+    on_success: complete
+    on_failure: regenerate
+
+  - name: regenerate
+    agent: industry-qa-agent
+    inputs:
+      industry_name: "{{ industries[industry].name }}"
+      industry_slug: "{{ industry }}"
+      industry_id: "{{ industries[industry].id }}"
+      pillar: "{{ pillar }}"
+      difficulty: "{{ difficulty }}"
+      question_count: "{{ question_count }}"
+      output_file: "output/{{ industry }}-{{ pillar }}-D{{ difficulty }}.yaml"
+      feedback: "{{ validation.suggestions }}"

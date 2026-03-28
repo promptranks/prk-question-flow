@@ -1,0 +1,15 @@
+name: prk-question-flow
+version: 1.0.0
+description: Automated question generation workflow for PromptRanks
+author: PromptRanks Team
+repository: https://github.com/promptranks/prk-question-flow
+
+agents:
+  - agents/industry-qa-agent.md
+  - agents/qa-validation-agent.md
+  - agents/role-qa-agent.md
+  - agents/qa-role-validation-agent.md
+
+sprints:
+  - sprints/industry-questions-sprint.yaml
+  - sprints/role-questions-sprint.yaml
