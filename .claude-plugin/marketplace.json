@@ -1,14 +1,21 @@
 {
   "name": "promptranks-marketplace",
   "owner": {
-    "name": "PromptRanks Team",
-    "email": "team@promptranks.com"
+    "name": "PromptRanks Team"
   },
   "metadata": {
     "description": "Official PromptRanks question generation workflow plugins",
     "version": "1.0.0"
   },
   "plugins": [
-    "prk-question-flow"
+    {
+      "name": "prk-question-flow",
+      "source": "./plugins/prk-question-flow",
+      "description": "Automated question generation workflow for PromptRanks",
+      "version": "2.0.0",
+      "license": "MIT",
+      "keywords": ["promptranks", "questions", "workflow", "pecam"],
+      "category": "productivity"
+    }
   ]
 }

@@ -1,0 +1,36 @@
+---
+name: prk-question-revise
+version: 1.0.0
+description: Regenerate REVISED questions
+type: command
+---
+
+# prk-question-revise Command
+
+Regenerate questions with qa_status=REVISED.
+
+## Usage
+
+```bash
+prk-question-revise
+```
+
+## Behavior
+
+1. **Scan all questions-*.yaml files**
+2. **Find qa_status: REVISED**
+3. **Call agent:**
+   - `question-reviser` for each REVISED question
+4. **Update same YAML file**
+5. **Set qa_status: TBI**
+
+## Output
+
+```
+Revising questions...
+
+✓ tech-data-scientist-E-D2-001: Regenerated
+✓ finance-analyst-M-D3-002: Regenerated
+
+2 questions revised. Run 'prk-question-qa' to validate.
+```

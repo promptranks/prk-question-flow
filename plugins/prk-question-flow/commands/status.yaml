@@ -1,0 +1,38 @@
+---
+name: prk-question-status
+version: 1.0.0
+description: Display generation and QA progress
+type: command
+---
+
+# prk-question-status Command
+
+Show current progress of question generation and QA.
+
+## Usage
+
+```bash
+prk-question-status
+```
+
+## Output
+
+```
+Working Folder: work-2026-03-28-001
+Status: In Progress
+
+Generation Progress:
+  core: ✓ Complete (50 questions)
+  tech: ⏳ In Progress (30/50 questions)
+  finance: ⏸ Pending
+
+QA Progress:
+  core: ✓ Complete (48 PASSED, 2 REVISED)
+  tech: ⏸ Pending
+  finance: ⏸ Pending
+
+Total Questions: 80
+  PASSED: 48
+  REVISED: 2
+  TBI: 30
+```
