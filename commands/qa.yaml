@@ -1,0 +1,45 @@
+---
+name: prk-question-qa
+version: 1.0.0
+description: Validate generated questions
+type: command
+---
+
+# prk-question-qa Command
+
+Validate questions with QA agent, skip PASSED questions.
+
+## Usage
+
+```bash
+prk-question-qa
+```
+
+## Behavior
+
+1. **Read current working folder**
+2. **Process only TBI and REVISED questions**
+3. **Skip PASSED questions**
+4. **For each question:**
+   - Validate format, content, quality
+   - Semantic duplicate check via MCP (similarity > 0.85)
+   - Score: clarity, relevance, difficulty (1-10)
+   - Update qa_status:
+     - PASSED if score ≥ 7.0 and no duplicates
+     - REVISED if score < 7.0 or duplicate (add feedback)
+5. **Update qa-status.yaml**
+6. **Report:** "All questions PASSED" or "X questions need revision"
+
+## Output
+
+```
+QA Progress: tech industry
+
+✓ tech-data-scientist-P-D1-001: PASSED (score: 8.5)
+✓ tech-data-scientist-P-D1-002: PASSED (score: 8.2)
+✗ tech-data-scientist-E-D2-001: REVISED (score: 6.5)
+  - Lacks industry-specific context
+  - Option C too similar to B
+
+Summary: 8/10 PASSED, 2 REVISED
+```

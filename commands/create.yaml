@@ -1,0 +1,88 @@
+---
+name: prk-question-create
+version: 1.0.0
+description: Generate questions for industries and roles
+type: command
+---
+
+# prk-question-create Command
+
+Generate questions for all industries and roles with specified distribution.
+
+## Usage
+
+```bash
+prk-question-create [number]
+```
+
+## Parameters
+
+- `number`: Questions per role (default: 10)
+
+## Behavior
+
+1. **Read current working folder** from `state.yaml`
+
+2. **Lock industry.yaml** to prevent modifications
+
+3. **For each industry in industry.yaml:**
+   - For each role in roles.yaml:
+     - Generate `number` questions
+     - Distribution: 2 per pillar (P, E, C, M, A)
+     - Difficulty: 4 easy, 4 medium, 2 hard
+   - Save to `questions-{industry_slug}.yaml`
+   - Update `create-status.yaml`
+   - Stop after industry completion
+
+4. **Call agents:**
+   - `industry-qa-agent` for each role
+   - Provides full context: PECAM framework, industry, role, pillar, difficulty
+
+5. **Auto-call** `prk-question-status` at end
+
+## Output Format
+
+```yaml
+# questions-tech.yaml
+industry: Technology
+industry_slug: tech
+industry_id: uuid
+generated_at: 2026-03-28T10:30:00Z
+
+questions:
+  - id: tech-data-scientist-P-D1-001
+    role: Data Scientist
+    role_slug: data-scientist
+    role_id: uuid
+    pillar: P
+    difficulty: 1
+    question_text: |
+      As a data scientist, you're prompting an LLM to...
+    options:
+      - "Option A"
+      - "Option B (correct)"
+      - "Option C"
+      - "Option D"
+    correct_answer: 1
+    explanation: |
+      Option B is correct because...
+    tags:
+      - data-science
+      - prompt-design
+    qa_status: TBI
+```
+
+## Progress Tracking
+
+```yaml
+# create-status.yaml
+current_industry: tech
+current_role: ml-engineer
+completed_industries:
+  - core
+in_progress: tech
+pending:
+  - finance
+total_questions_generated: 80
+last_updated: 2026-03-28T11:00:00Z
+```
