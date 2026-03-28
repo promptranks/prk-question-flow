@@ -1,21 +1,22 @@
-# PRK Question Flow v2.1
+# PRK Question Flow v2.2
 
-**Automated question generation workflow for PromptRanks**
+**Automated question generation workflow for PromptRanks with MCP integration**
 
-Generate high-quality, industry/role-specific questions with built-in QA validation and semantic duplicate detection.
+Generate high-quality, industry/role-specific questions with built-in QA validation, semantic duplicate detection, and real database IDs via MCP.
 
 [![License: MIT](https://img.shields.io/badge/License-MIT-blue.svg)](LICENSE)
+[![npm](https://img.shields.io/npm/v/@promptranks/questions-mcp-server)](https://www.npmjs.com/package/@promptranks/questions-mcp-server)
 
 ---
 
 ## Features
 
+✅ **Real Database IDs** - MCP integration for industry/role management
 ✅ **Stateful Execution** - Pause/resume with timestamped batches
 ✅ **Semantic Duplicate Detection** - Embedding-based similarity check
 ✅ **Automated QA** - Only processes TBI/REVISED questions
-✅ **MCP Integration** - Database access for validation
-✅ **DB-Ready Export** - SQL/JSON for direct import
-✅ **Community Ready** - Easy PR submission
+✅ **DB-Ready Export** - SQL/JSON with real database relationships
+✅ **Community Ready** - Published MCP server on npm
 
 ---
 
@@ -35,19 +36,24 @@ npm install -g @promptranks/questions-mcp-server
 
 ### 3. Configure MCP
 
-Add to `~/.claude/mcp.json`:
+Get your API key from https://promptranks.org/mcp-api-key
+
+Create `~/.promptranks/mcp_api_key.json`:
+
+```json
+{
+  "key": "mcp_xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx"
+}
+```
+
+Add to `~/.claude.json`:
 
 ```json
 {
   "mcpServers": {
-    "promptranks-questions": {
+    "prk-questions": {
       "command": "npx",
-      "args": ["@promptranks/questions-mcp-server"],
-      "env": {
-        "DATABASE_URL": "postgresql://user:pass@host:5432/promptranks",
-        "EMBEDDING_PROVIDER": "openai",
-        "OPENAI_API_KEY": "your-key"
-      }
+      "args": ["@promptranks/questions-mcp-server"]
     }
   }
 }
@@ -176,10 +182,11 @@ Skips `PASSED` questions for efficiency.
 
 ### 3. MCP Integration
 
-Contributors run their own MCP server with:
-- Read-only database access
-- Embedding generation (OpenAI/Anthropic)
-- Rate limiting (100 req/hour)
+The MCP server provides two tools:
+- `get_or_create_industry` - Creates/retrieves industries with real database IDs
+- `get_or_create_role` - Creates/retrieves roles with real database IDs
+
+All generated questions use real database IDs for proper relationships.
 
 ---
 
