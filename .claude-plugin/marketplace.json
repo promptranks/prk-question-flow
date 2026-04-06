@@ -5,14 +5,14 @@
   },
   "metadata": {
     "description": "Official PromptRanks question generation workflow plugins",
-    "version": "2.1.0"
+    "version": "2.0.0"
   },
   "plugins": [
     {
       "name": "prk-question-flow",
       "source": "./plugins/prk-question-flow",
       "description": "Automated question generation workflow for PromptRanks",
-      "version": "2.1.0",
+      "version": "2.0.0",
       "license": "MIT",
       "keywords": ["promptranks", "questions", "workflow", "pecam", "automated", "generation", "evaluation", "ranking","prompt"],
       "category": "productivity"
