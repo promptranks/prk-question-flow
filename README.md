@@ -1,23 +1,24 @@
-# PRK Question Flow v2.4
+# PRK Question Flow v2.5
 
 **Automated question generation workflow for PromptRanks with quality controls**
 
-Generate high-quality, database-ready questions with randomized options, balanced lengths, enhanced validation, and automatic QA.
+Generate high-quality, database-ready questions with randomized options, balanced lengths, enhanced validation, and automatic post-generation quality correction.
 
 [![License: MIT](https://img.shields.io/badge/License-MIT-blue.svg)](LICENSE)
 [![npm](https://img.shields.io/npm/v/@promptranks/questions-mcp-server)](https://www.npmjs.com/package/@promptranks/questions-mcp-server)
 
 ---
 
-## 🎉 What's New in v2.4
+## 🎉 What's New in v2.5
 
-✅ **Fixed Example Bias** - Examples now demonstrate proper length balance (all options similar length)  
-✅ **Consistent Quality** - Agent follows instructions by learning from corrected examples  
-✅ **Root Cause Fix** - Addressed contradiction between instructions and examples in v2.3  
+✅ **Post-Generation Validation** - Automatic position distribution correction after generation  
+✅ **Length Balance Checking** - Flags questions with severe length imbalance for review  
+✅ **Quality Reporting** - Detailed validation summary with flagged questions  
+✅ **Batch Processing** - Generates in smaller chunks (10 questions) for consistent quality  
 
-**Why this matters**: v2.3 had correct instructions but contradictory examples. LLMs learn from examples more than instructions, causing generated questions to have length bias despite clear rules. v2.4 fixes the examples to match the quality controls.
+**Why this matters**: v2.4 had correct instructions and examples, but agents don't always follow them consistently during long generation sessions. v2.5 adds automatic validation and correction to ensure quality regardless of agent behavior.
 
-## What's New in v2.3
+## What's New in v2.4
 
 ✅ **Randomized Options** - Correct answers distributed across all positions (no more position bias)  
 ✅ **Balanced Option Lengths** - All options similar length (within 20-30%) to avoid visual cues  

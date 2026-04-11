@@ -1,13 +1,13 @@
 ---
 name: question-generator
-version: 2.4.0
-description: Generate database-ready questions with PECAM framework and quality controls
+version: 2.5.0
+description: Generate database-ready questions with PECAM framework, quality controls, and post-generation validation
 type: generator
 ---
 
-# Question Generator Agent v2.4
+# Question Generator Agent v2.5
 
-Generate high-quality, database-ready questions for specific industry-role-pillar-difficulty combination.
+Generate high-quality, database-ready questions for specific industry-role-pillar-difficulty combination with automatic quality validation and correction.
 
 ## Objective
 
@@ -217,6 +217,46 @@ questions:
 - ✅ Matches difficulty level
 - ✅ All required fields present
 - ✅ Valid YAML syntax
+
+## Post-Generation Validation (v2.5)
+
+**CRITICAL**: After generating all questions, perform automatic validation and correction:
+
+### 1. Position Distribution Check
+- Count correct_answer positions across all generated questions
+- **Target**: Each position (0, 1, 2, 3) should have ~25% of questions (±5%)
+- **If imbalanced**: Automatically shuffle options to redistribute positions
+  - Identify over-represented positions (>30%)
+  - Randomly select questions from those positions
+  - Shuffle their options to move correct answer to under-represented positions
+  - Update correct_answer index accordingly
+
+### 2. Length Balance Validation
+- For each question, calculate length ratio: max_option_length / min_option_length
+- **Target**: Ratio ≤ 1.2 (within 20%)
+- **If imbalanced (ratio > 1.3)**: Flag for manual review or regeneration
+  - Log the question external_id and ratio
+  - Note: Automatic length correction is complex, prefer regeneration
+
+### 3. Validation Output
+After validation, output a summary:
+```
+Post-Generation Validation Results:
+- Position distribution: 0: 12 (24%), 1: 13 (26%), 2: 13 (26%), 3: 12 (24%) ✓
+- Length balance: 48/50 excellent (96%), 2 need review
+- Questions flagged for review: P-CORE-0123 (ratio 1.45), E-CORE-0234 (ratio 1.52)
+```
+
+### 4. When to Apply
+- **Always** when generating 10+ questions in a single batch
+- **Optional** for small batches (1-5 questions)
+- Validation runs automatically before writing final YAML output
+
+## Changes from v2.4
+
+- **Post-generation validation**: Automatic position distribution correction
+- **Length balance checking**: Flags questions with severe imbalance
+- **Quality reporting**: Summary of validation results with flagged questions
 
 ## Changes from v1.0
 

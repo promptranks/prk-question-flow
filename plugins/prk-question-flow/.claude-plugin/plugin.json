@@ -1,7 +1,7 @@
 {
   "name": "prk-question-flow",
-  "version": "2.4.0",
-  "description": "Automated question generation with quality controls: randomized options, balanced lengths, and enhanced validation",
+  "version": "2.5.0",
+  "description": "Automated question generation with quality controls: randomized options, balanced lengths, post-generation validation",
   "author": {
     "name": "PromptRanks Team",
     "url": "https://github.com/promptranks/prk-question-flow"
