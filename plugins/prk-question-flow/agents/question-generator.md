@@ -99,13 +99,19 @@ questions:
 - Use `starting_index` parameter to continue sequence
 
 **Options Array**: Exactly 4 options
-- First option (index 0) is the correct answer
-- Remaining 3 are wrong answers
+- **CRITICAL**: Randomize the position of the correct answer (0-3)
+- All 4 options must be similar in length (within 20% of each other)
 - All options should be plausible to someone unfamiliar with the concept
+- Distractors (wrong answers) must be:
+  - Plausible and detailed (not obviously wrong)
+  - Similar length to correct answer (avoid length bias)
+  - Based on common misconceptions or partial understanding
+  - Specific and concrete (not vague or generic)
 
 **Correct Answer**: Integer 0-3 (index of correct option)
-- Always 0 in generated output (correct answer is first)
-- Will be shuffled during import if needed
+- **MUST randomize position** - do NOT always use 0
+- Distribute across all positions (0, 1, 2, 3) to avoid patterns
+- The correct answer should not be identifiable by length or position
 
 **Tags**: 2-4 relevant tags
 - Include pillar tag (e.g., "prompt-design", "evaluation")
@@ -129,6 +135,9 @@ Before outputting, verify:
 - ✅ Question text is clear and unambiguous
 - ✅ Correct answer is genuinely correct
 - ✅ Wrong answers are plausible but incorrect
+- ✅ **All 4 options are similar length (within 20% of each other)**
+- ✅ **Correct answer position is randomized (not always 0)**
+- ✅ **Distractors are detailed and plausible (not obviously wrong)**
 - ✅ Explanation provides clear reasoning
 - ✅ All required fields present
 - ✅ UUIDs are valid format
@@ -147,13 +156,13 @@ questions:
     question_text: |
       As a Software Engineer, you're using an LLM to generate unit tests for a complex authentication module. Which prompt structure will produce the most comprehensive test coverage?
     options:
-      - "Provide the module code, specify edge cases to test (invalid tokens, expired sessions, concurrent requests), request tests with assertions and mocks"
       - "Generate unit tests for this authentication code"
-      - "Write tests that cover all possible scenarios"
-      - "Create comprehensive test suite with good coverage"
-    correct_answer: 0
+      - "Provide the module code, specify edge cases (invalid tokens, expired sessions, concurrent requests), and request tests with assertions and mocks"
+      - "Write tests that cover all possible authentication scenarios"
+      - "Create a comprehensive test suite with good coverage"
+    correct_answer: 1
     explanation: |
-      The first option is correct because it provides specific context (the code), explicit requirements (edge cases), and clear output expectations (assertions and mocks). This structured approach guides the LLM to generate targeted, comprehensive tests rather than generic boilerplate.
+      The second option is correct because it provides specific context (the code), explicit requirements (edge cases), and clear output expectations (assertions and mocks). This structured approach guides the LLM to generate targeted, comprehensive tests rather than generic boilerplate.
     tags:
       - prompt-design
       - software-engineering
@@ -176,13 +185,13 @@ questions:
     question_text: |
       You're prompting an LLM to refactor a legacy codebase with inconsistent patterns. The initial output mixes old and new patterns. What's the most effective prompt refinement strategy?
     options:
-      - "Add explicit constraints: 'Use ONLY pattern X for all cases', provide before/after examples, request consistency verification in the output"
-      - "Tell the LLM to be more consistent"
-      - "Regenerate multiple times and pick the best one"
-      - "Accept the mixed patterns and manually fix them"
-    correct_answer: 0
+      - "Tell the LLM to be more consistent in its approach"
+      - "Regenerate multiple times and select the best output"
+      - "Accept the mixed patterns and manually fix inconsistencies"
+      - "Add explicit constraints ('Use ONLY pattern X'), provide before/after examples, and request consistency verification in the output"
+    correct_answer: 3
     explanation: |
-      The first option is correct because it addresses the root cause: ambiguous instructions. By explicitly constraining to a single pattern, providing concrete examples, and requesting self-verification, you guide the LLM toward consistent output. This is more effective than vague requests or post-generation fixes.
+      The fourth option is correct because it addresses the root cause: ambiguous instructions. By explicitly constraining to a single pattern, providing concrete examples, and requesting self-verification, you guide the LLM toward consistent output. This is more effective than vague requests or post-generation fixes.
     tags:
       - prompt-design
       - software-engineering

@@ -47,16 +47,28 @@ Review questions and update qa_status to PASSED or REVISED.
 - Explanation teaches concept
 - Score: 1-10 (≥7 required)
 
-### 3. Industry/Role Specificity
+### 3. Option Quality & Balance (NEW in v2.3)
+- **Length Balance**: All 4 options must be similar length (within 30% of each other)
+  - Calculate: max_length / min_length ≤ 1.3
+  - Flag if correct answer is significantly longer than distractors
+- **Distractor Plausibility**: Wrong answers must be detailed and plausible
+  - Not obviously wrong (e.g., "Never do this", "This is impossible")
+  - Not too vague (e.g., "Do it better", "Use best practices")
+  - Based on common misconceptions or partial understanding
+- **Position Randomization**: Check for patterns in correct_answer position
+  - Flag if batch shows bias (e.g., >40% at same position)
+- Score: 1-10 (≥7 required)
+
+### 4. Industry/Role Specificity
 - Uses industry terminology
 - Realistic for role
 - Score: 1-10 (≥7 required)
 
-### 4. Pillar Alignment
+### 5. Pillar Alignment
 - Tests specified pillar
 - Score: 1-10 (≥7 required)
 
-### 5. Semantic Duplicate Check
+### 6. Semantic Duplicate Check
 - Via MCP: `check_duplicate(question_text, industry_id, role_id)`
 - Cosine similarity > 0.85 = duplicate
 
@@ -66,13 +78,16 @@ Review questions and update qa_status to PASSED or REVISED.
 2. **Filter:** Process only `qa_status: TBI` or `REVISED`
 3. **Skip:** `qa_status: PASSED`
 4. **For each question:**
-   - Run all checks
-   - Calculate scores
+   - Run all checks (format, content, option quality, specificity, pillar, duplicates)
+   - Calculate scores for each dimension
+   - **Check option length balance**: Flag if correct answer is >30% longer than average distractor
+   - **Check distractor quality**: Flag if distractors are too vague or obviously wrong
    - Check duplicates via MCP
    - Update qa_status:
-     - `PASSED` if score ≥ 7.0 and no duplicates
-     - `REVISED` if score < 7.0 or duplicate found
+     - `PASSED` if all scores ≥ 7.0, no duplicates, and options are balanced
+     - `REVISED` if any score < 7.0, duplicate found, or option quality issues
 5. **Save** updated file
+6. **Report** position distribution and length bias statistics for the batch
 
 ## Output Format
 
