@@ -1,0 +1,9 @@
+{
+  "name": "prk-task-flow",
+  "version": "1.0.0",
+  "description": "Automated task generation for PromptRanks PPA assessments with quality controls and feasibility testing",
+  "author": {
+    "name": "PromptRanks Team",
+    "url": "https://github.com/promptranks/prk-task-flow"
+  }
+}
