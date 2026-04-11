@@ -1,11 +1,11 @@
 ---
 name: question-generator
-version: 2.3.0
+version: 2.4.0
 description: Generate database-ready questions with PECAM framework and quality controls
 type: generator
 ---
 
-# Question Generator Agent v2.3
+# Question Generator Agent v2.4
 
 Generate high-quality, database-ready questions for specific industry-role-pillar-difficulty combination.
 
@@ -156,13 +156,13 @@ questions:
     question_text: |
       As a Software Engineer, you're using an LLM to generate unit tests for a complex authentication module. Which prompt structure will produce the most comprehensive test coverage?
     options:
-      - "Generate unit tests for this authentication code"
-      - "Provide the module code, specify edge cases (invalid tokens, expired sessions, concurrent requests), and request tests with assertions and mocks"
-      - "Write tests that cover all possible authentication scenarios"
-      - "Create a comprehensive test suite with good coverage"
+      - "Provide the module code and request tests covering standard authentication flows and common edge cases"
+      - "Specify edge cases (invalid tokens, expired sessions, concurrent requests) and request tests with assertions and mocks"
+      - "Request a comprehensive test suite with good coverage for all possible authentication scenarios"
+      - "Share the authentication code and ask the LLM to generate unit tests with proper test structure"
     correct_answer: 1
     explanation: |
-      The second option is correct because it provides specific context (the code), explicit requirements (edge cases), and clear output expectations (assertions and mocks). This structured approach guides the LLM to generate targeted, comprehensive tests rather than generic boilerplate.
+      The second option is correct because it provides explicit requirements (specific edge cases) and clear output expectations (assertions and mocks). This structured approach guides the LLM to generate targeted, comprehensive tests rather than generic boilerplate. All options are similar length to avoid telegraphing the answer.
     tags:
       - prompt-design
       - software-engineering
@@ -185,13 +185,13 @@ questions:
     question_text: |
       You're prompting an LLM to refactor a legacy codebase with inconsistent patterns. The initial output mixes old and new patterns. What's the most effective prompt refinement strategy?
     options:
-      - "Tell the LLM to be more consistent in its approach"
-      - "Regenerate multiple times and select the best output"
-      - "Accept the mixed patterns and manually fix inconsistencies"
-      - "Add explicit constraints ('Use ONLY pattern X'), provide before/after examples, and request consistency verification in the output"
-    correct_answer: 3
+      - "Request the LLM to be more consistent and follow a single pattern throughout the refactoring"
+      - "Generate multiple refactoring attempts and manually select the version with the best consistency"
+      - "Add explicit constraints ('Use ONLY pattern X'), provide before/after examples, and request verification"
+      - "Accept the mixed patterns as reasonable and manually adjust any critical inconsistencies afterward"
+    correct_answer: 2
     explanation: |
-      The fourth option is correct because it addresses the root cause: ambiguous instructions. By explicitly constraining to a single pattern, providing concrete examples, and requesting self-verification, you guide the LLM toward consistent output. This is more effective than vague requests or post-generation fixes.
+      The third option is correct because it addresses the root cause: ambiguous instructions. By explicitly constraining to a single pattern, providing concrete examples, and requesting self-verification, you guide the LLM toward consistent output. This is more effective than vague requests or post-generation fixes. All options are similar length to avoid length bias.
     tags:
       - prompt-design
       - software-engineering

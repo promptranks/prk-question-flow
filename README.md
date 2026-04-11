@@ -1,4 +1,4 @@
-# PRK Question Flow v2.3
+# PRK Question Flow v2.4
 
 **Automated question generation workflow for PromptRanks with quality controls**
 
@@ -9,7 +9,15 @@ Generate high-quality, database-ready questions with randomized options, balance
 
 ---
 
-## 🎉 What's New in v2.3
+## 🎉 What's New in v2.4
+
+✅ **Fixed Example Bias** - Examples now demonstrate proper length balance (all options similar length)  
+✅ **Consistent Quality** - Agent follows instructions by learning from corrected examples  
+✅ **Root Cause Fix** - Addressed contradiction between instructions and examples in v2.3  
+
+**Why this matters**: v2.3 had correct instructions but contradictory examples. LLMs learn from examples more than instructions, causing generated questions to have length bias despite clear rules. v2.4 fixes the examples to match the quality controls.
+
+## What's New in v2.3
 
 ✅ **Randomized Options** - Correct answers distributed across all positions (no more position bias)  
 ✅ **Balanced Option Lengths** - All options similar length (within 20-30%) to avoid visual cues  
