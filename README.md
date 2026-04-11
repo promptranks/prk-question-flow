@@ -1,15 +1,23 @@
-# PRK Question Flow v2.1
+# PRK Question Flow v2.2
 
-**Automated question generation workflow for PromptRanks with interactive taxonomy selection**
+**Automated question generation workflow for PromptRanks with auto-QA validation**
 
-Generate high-quality, database-ready questions with built-in QA validation, semantic duplicate detection, and direct database import.
+Generate high-quality, database-ready questions with automatic QA validation, semantic duplicate detection, and direct database import.
 
 [![License: MIT](https://img.shields.io/badge/License-MIT-blue.svg)](LICENSE)
 [![npm](https://img.shields.io/npm/v/@promptranks/questions-mcp-server)](https://www.npmjs.com/package/@promptranks/questions-mcp-server)
 
 ---
 
-## 🎉 What's New in v2.1
+## 🎉 What's New in v2.2
+
+✅ **Auto-QA Integration** - Questions are automatically validated after generation  
+✅ **Single Command Workflow** - No need to run separate QA command  
+✅ **Guaranteed Quality** - All questions are validated before export  
+✅ **Faster Iteration** - Immediate feedback on question quality  
+✅ **Backward Compatible** - Can skip auto-QA with `--skip-qa` flag if needed  
+
+## What's New in v2.1
 
 ✅ **Required Pillar Field** - All questions now include PECAM pillar (P, E, C, A, M)  
 ✅ **Numeric Difficulty** - Standardized difficulty levels (1=easy, 2=medium, 3=hard)  
@@ -76,16 +84,21 @@ prk-question-init --role=software-engineer,data-scientist
 # Preview generation plan
 prk-question-plan
 
-# Generate database-ready questions
+# Generate AND validate questions (auto-QA enabled in v2.2)
 prk-question-create 10
+# ✓ Questions generated
+# ✓ Auto-QA validation complete
+# ✓ Results: 48 PASSED, 2 REVISED
 
-# QA validation
-prk-question-qa
-
-# Revise failed questions
+# Revise failed questions (if any)
 prk-question-revise
 
-# Export SQL (ready for direct import)
+# Re-run to validate revised questions
+prk-question-create 0  # Skips generation, runs QA only
+# OR
+prk-question-qa  # Manual QA command still available
+
+# Export SQL (only PASSED questions)
 prk-question-export
 
 # Import to database
@@ -120,9 +133,10 @@ docker exec -i saas-webapp-postgres psql -U promptranks -d promptranks < tagging
 | `prk-industry` | Display selected industries |
 | `prk-role` | Display selected roles |
 | `prk-question-plan` | Preview generation plan |
-| `prk-question-create [N]` | Generate N questions per role |
+| `prk-question-create [N]` | Generate and auto-validate N questions per role |
+| `prk-question-create [N] --skip-qa` | Generate questions without auto-QA |
 | `prk-question-create [N] --cross-role` | Generate universal questions |
-| `prk-question-qa` | Validate questions (TBI/REVISED only) |
+| `prk-question-qa` | Validate questions manually (TBI/REVISED only) |
 | `prk-question-revise` | Regenerate failed questions |
 | `prk-question-status` | Show progress |
 | `prk-question-validate` | Pre-export validation |
@@ -139,9 +153,9 @@ docker exec -i saas-webapp-postgres psql -U promptranks -d promptranks < tagging
 ## Workflow Lifecycle
 
 ```
-Init → Plan → Create → QA → Revise → QA (loop) → Validate → Export → Import
-                                                                         ↓
-                                                                    Tag (optional)
+Init → Plan → Create+QA → Revise → Create+QA (loop) → Validate → Export → Import
+                                                                              ↓
+                                                                         Tag (optional)
 ```
 
 ### Question Status Flow
@@ -149,7 +163,7 @@ Init → Plan → Create → QA → Revise → QA (loop) → Validate → Export
 ```
 CREATE → TBI
          ↓
-    QA (TBI) → PASSED ✓
+    AUTO-QA → PASSED ✓
          ↓
       REVISED
          ↓
@@ -333,6 +347,28 @@ MIT
 ---
 
 ## Changelog
+
+### v2.2.0 (2026-04-11)
+
+**New Features**:
+- Auto-QA integration - Questions automatically validated after generation
+- Single command workflow - No need to run separate QA command
+- Immediate feedback - See validation results right after generation
+- Optional skip flag - Use `--skip-qa` to disable auto-QA if needed
+
+**Improvements**:
+- Guaranteed quality - All questions validated before export
+- Faster iteration - Immediate feedback on question quality
+- Better UX - Combined generation + QA status in single output
+- Backward compatible - Manual `prk-question-qa` still available
+
+### v2.1.0 (2026-04-07)
+
+**New Features**:
+- Required pillar field in all questions
+- Numeric difficulty levels (1=easy, 2=medium, 3=hard)
+- Enhanced validation for all required fields
+- Backoffice API compatibility
 
 ### v2.0.0 (2026-04-06)
 

@@ -1,7 +1,7 @@
 # PRK Question Generation & QA Workflow
 
-**Version:** 2.0.0
-**Date:** 2026-03-28
+**Version:** 2.2.0
+**Date:** 2026-04-11
 **Status:** Final Specification
 
 ---
@@ -17,9 +17,11 @@ Complete lifecycle management for PromptRanks question generation and QA inspect
 ## Workflow Lifecycle
 
 ```
-1. Init → 2. Plan → 3. Create → 4. QA → 5. Revise →
+1. Init → 2. Plan → 3. Create+QA → 4. Revise → 5. Create+QA (loop) →
 6. Validate → 7. Export → 8. Manual Import → 9. Submit PR
 ```
+
+**Note**: In v2.2+, QA validation runs automatically after question generation (step 3).
 
 ---
 
@@ -216,10 +218,11 @@ Estimated time: 2-3 hours
 ### Generation Commands
 
 #### `prk-question-create [number]`
-Generate questions for all industries and roles
+Generate questions for all industries and roles with automatic QA validation
 
 **Parameters:**
 - `number`: Questions per role (default: 10)
+- `--skip-qa`: Skip automatic QA validation (optional, for debugging)
 
 **Behavior:**
 - Reads current working folder from `state.yaml`
@@ -231,12 +234,23 @@ Generate questions for all industries and roles
   - **Difficulty:** 4 easy, 4 medium, 2 hard
 - Saves to `questions-{industry_slug}.yaml` (one file per industry, all roles)
 - Updates `create-status.yaml` after each industry
+- **[v2.2+] Automatically runs QA validation (unless `--skip-qa` specified):**
+  - Validates format, content, quality
+  - Semantic duplicate check via MCP (similarity > 0.85)
+  - Scores: clarity, relevance, difficulty (1-10)
+  - Sets qa_status: PASSED (≥7.0) or REVISED (<7.0)
+  - Updates `qa-status.yaml`
+- Displays combined generation + QA results
 - Stops after each industry completion
 - Auto-calls `prk-question-status` at end
 
 **Example:**
 ```bash
+# Generate with auto-QA (default in v2.2+)
 prk-question-create 10
+
+# Generate without auto-QA
+prk-question-create 10 --skip-qa
 ```
 
 **Output File Format:**
