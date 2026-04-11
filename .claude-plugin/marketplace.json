@@ -19,7 +19,7 @@
     },
     {
       "name": "prk-task-flow",
-      "source": "git+https://github.com/promptranks/prk-task-flow.git",
+      "source": "github:promptranks/prk-task-flow",
       "description": "Automated task generation workflow for PromptRanks PPA assessments",
       "version": "1.0.0",
       "license": "MIT",
