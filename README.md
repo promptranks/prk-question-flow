@@ -1,4 +1,4 @@
-# PRK Question Flow v2.0
+# PRK Question Flow v2.1
 
 **Automated question generation workflow for PromptRanks with interactive taxonomy selection**
 
@@ -9,7 +9,14 @@ Generate high-quality, database-ready questions with built-in QA validation, sem
 
 ---
 
-## 🎉 What's New in v2.0
+## 🎉 What's New in v2.1
+
+✅ **Required Pillar Field** - All questions now include PECAM pillar (P, E, C, A, M)  
+✅ **Numeric Difficulty** - Standardized difficulty levels (1=easy, 2=medium, 3=hard)  
+✅ **Enhanced Validation** - Question validator checks all required fields including pillar  
+✅ **Backoffice Compatible** - Questions ready for direct import to backoffice API  
+
+## What's New in v2.0
 
 ✅ **Database-Ready Format** - Questions ready for direct SQL import (no transformation needed)  
 ✅ **Interactive Selection** - Choose industries/roles from live taxonomy via MCP  

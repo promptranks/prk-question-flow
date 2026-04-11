@@ -1,11 +1,11 @@
 ---
 name: question-validator
-version: 1.0.0
-description: Validate questions with semantic duplicate detection
+version: 2.1.0
+description: Validate questions with semantic duplicate detection and required fields
 type: validator
 ---
 
-# Question Validator Agent
+# Question Validator Agent v2.1
 
 Validate generated questions, process only TBI and REVISED status.
 
@@ -16,15 +16,30 @@ Review questions and update qa_status to PASSED or REVISED.
 ## Input Variables
 
 - `questions_file`: Path to questions YAML file
-- `industry_id`: Industry UUID
-- `role_id`: Role UUID
+- `industry_id`: Industry UUID (optional for core questions)
+- `role_id`: Role UUID (optional for core questions)
 
 ## Validation Checks
 
 ### 1. Format Validation
 - Valid YAML structure
-- All required fields present
+- All required fields present:
+  - `external_id`
+  - `pillar` (P, E, C, A, or M)
+  - `difficulty` (1, 2, or 3)
+  - `question_type` (mcq, multi_select, true_false)
+  - `question_text`
+  - `options` (array of 4 items)
+  - `correct_answer` (0-3)
+  - `explanation`
+  - `tags` (array)
+  - `content_tier` (core, premium, enterprise)
+  - `source`
+  - `version`
+  - `is_active`
 - correct_answer is 0-3
+- pillar is one of: P, E, C, A, M
+- difficulty is 1, 2, or 3
 
 ### 2. Content Quality
 - Clear question text
