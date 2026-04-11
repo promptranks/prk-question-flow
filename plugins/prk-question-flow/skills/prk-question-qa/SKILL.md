@@ -2,7 +2,7 @@
 name: prk-question-qa
 description: Validate generated questions with QA agent
 user-invocable: true
-disable-model-invocation: true
+disable-model-invocation: false
 ---
 
 # prk-question-qa

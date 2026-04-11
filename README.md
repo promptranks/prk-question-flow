@@ -1,28 +1,29 @@
-# PRK Question Flow v2.2
+# PRK Question Flow v2.3
 
-**Automated question generation workflow for PromptRanks with auto-QA validation**
+**Automated question generation workflow for PromptRanks with quality controls**
 
-Generate high-quality, database-ready questions with automatic QA validation, semantic duplicate detection, and direct database import.
+Generate high-quality, database-ready questions with randomized options, balanced lengths, enhanced validation, and automatic QA.
 
 [![License: MIT](https://img.shields.io/badge/License-MIT-blue.svg)](LICENSE)
 [![npm](https://img.shields.io/npm/v/@promptranks/questions-mcp-server)](https://www.npmjs.com/package/@promptranks/questions-mcp-server)
 
 ---
 
-## 🎉 What's New in v2.2
+## 🎉 What's New in v2.3
+
+✅ **Randomized Options** - Correct answers distributed across all positions (no more position bias)  
+✅ **Balanced Option Lengths** - All options similar length (within 20-30%) to avoid visual cues  
+✅ **Plausible Distractors** - Wrong answers are detailed and realistic, not obviously wrong  
+✅ **Enhanced Validation** - QA checks for option quality, length balance, and position patterns  
+✅ **Quality Controls** - Prevents common test-taking shortcuts (length bias, position patterns)  
+
+## What's New in v2.2
 
 ✅ **Auto-QA Integration** - Questions are automatically validated after generation  
 ✅ **Single Command Workflow** - No need to run separate QA command  
 ✅ **Guaranteed Quality** - All questions are validated before export  
 ✅ **Faster Iteration** - Immediate feedback on question quality  
 ✅ **Backward Compatible** - Can skip auto-QA with `--skip-qa` flag if needed  
-
-## What's New in v2.1
-
-✅ **Required Pillar Field** - All questions now include PECAM pillar (P, E, C, A, M)  
-✅ **Numeric Difficulty** - Standardized difficulty levels (1=easy, 2=medium, 3=hard)  
-✅ **Enhanced Validation** - Question validator checks all required fields including pillar  
-✅ **Backoffice Compatible** - Questions ready for direct import to backoffice API  
 
 ## What's New in v2.0
 
@@ -347,6 +348,23 @@ MIT
 ---
 
 ## Changelog
+
+### v2.3.0 (2026-04-11)
+
+**New Features**:
+- Randomized correct answer positions - No more position bias (was 100% at position 0)
+- Balanced option lengths - All options within 20-30% of each other
+- Plausible distractors - Wrong answers are detailed and realistic
+- Enhanced QA validation - Checks option quality, length balance, position patterns
+
+**Improvements**:
+- Prevents test-taking shortcuts (length cues, position patterns)
+- Higher quality distractors based on common misconceptions
+- Better test validity and reliability
+
+**Bug Fixes**:
+- Fixed agent instructions that forced correct answer to always be first
+- Fixed length bias where correct answers were 1.5-3x longer than distractors
 
 ### v2.2.0 (2026-04-11)
 

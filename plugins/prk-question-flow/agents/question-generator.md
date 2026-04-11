@@ -1,11 +1,11 @@
 ---
 name: question-generator
-version: 2.1.0
-description: Generate database-ready questions with PECAM framework
+version: 2.3.0
+description: Generate database-ready questions with PECAM framework and quality controls
 type: generator
 ---
 
-# Question Generator Agent v2.1
+# Question Generator Agent v2.3
 
 Generate high-quality, database-ready questions for specific industry-role-pillar-difficulty combination.
 

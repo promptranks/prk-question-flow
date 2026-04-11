@@ -1,11 +1,11 @@
 ---
 name: question-validator
-version: 2.1.0
-description: Validate questions with semantic duplicate detection and required fields
+version: 2.3.0
+description: Validate questions with option quality checks and semantic duplicate detection
 type: validator
 ---
 
-# Question Validator Agent v2.1
+# Question Validator Agent v2.3
 
 Validate generated questions, process only TBI and REVISED status.
 
