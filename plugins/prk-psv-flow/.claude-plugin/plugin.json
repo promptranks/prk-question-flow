@@ -1,15 +1,9 @@
 {
   "name": "prk-psv-flow",
   "version": "1.0.0",
-  "description": "Automated PSV sample generation workflow for PromptRanks assessments",
-  "skills": [
-    "prk-psv-create",
-    "prk-psv-qa",
-    "prk-psv-revise",
-    "prk-psv-export"
-  ],
-  "agents": [
-    "psv-generator",
-    "psv-validator"
-  ]
+  "description": "Automated PSV sample generation workflow for PromptRanks meta-cognition assessments",
+  "author": {
+    "name": "PromptRanks Team",
+    "url": "https://github.com/promptranks/prk-psv-flow"
+  }
 }
