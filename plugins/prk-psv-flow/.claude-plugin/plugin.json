@@ -1,0 +1,15 @@
+{
+  "name": "prk-psv-flow",
+  "version": "1.0.0",
+  "description": "Automated PSV sample generation workflow for PromptRanks assessments",
+  "skills": [
+    "prk-psv-create",
+    "prk-psv-qa",
+    "prk-psv-revise",
+    "prk-psv-export"
+  ],
+  "agents": [
+    "psv-generator",
+    "psv-validator"
+  ]
+}

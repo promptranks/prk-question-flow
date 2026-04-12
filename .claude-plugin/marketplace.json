@@ -5,7 +5,7 @@
   },
   "metadata": {
     "description": "Official PromptRanks assessment generation workflow plugins",
-    "version": "2.2.0"
+    "version": "2.3.0"
   },
   "plugins": [
     {
@@ -24,6 +24,15 @@
       "version": "1.0.0",
       "license": "MIT",
       "keywords": ["promptranks", "tasks", "workflow", "ppa", "automated", "generation", "evaluation", "prompt", "assessment"],
+      "category": "productivity"
+    },
+    {
+      "name": "prk-psv-flow",
+      "source": "./plugins/prk-psv-flow",
+      "description": "Automated PSV sample generation workflow for PromptRanks meta-cognition assessments",
+      "version": "1.0.0",
+      "license": "MIT",
+      "keywords": ["promptranks", "psv", "workflow", "meta-cognition", "automated", "generation", "calibration", "evaluation", "samples"],
       "category": "productivity"
     }
   ]
