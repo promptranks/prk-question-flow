@@ -26,7 +26,7 @@ You will receive:
 Generate samples in YAML format:
 
 ```yaml
-samples:
+psv_samples:
   - id: <uuid>
     external_id: PSV-CORE-0001
     title: "Brief description of the sample"
@@ -159,4 +159,4 @@ After generating samples, automatically invoke the `psv-validator` agent to vali
 
 ## Output
 
-Return all samples in a single YAML structure with the `samples` key at the root.
+Return all samples in a single YAML structure with the `psv_samples` key at the root.
